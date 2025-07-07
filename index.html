@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Días sin arreglar el Atahualpa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #111;
+      color: #fff;
+      font-family: 'Anton', sans-serif;
+      text-align: center;
+      font-size: 6vw;
+      line-height: 1.2;
+    }
+    #mensaje span {
+      color: #ffcc00;
+      font-size: 8vw;
+    }
+  </style>
+</head>
+<body>
+
+<div id="mensaje">Cargando...</div>
+
+<script>
+  const start = new Date("2025-07-04T00:00:00-05:00");
+  const now = new Date();
+  const days = Math.floor((now - start) / 86_400_000); // ms en un día
+  document.getElementById("mensaje").innerHTML = `
+    La Concentración Deportiva de Pichincha va <span>${days}</span> días sin arreglar el Estadio Atahualpa.
+  `;
+</script>
+
+</body>
+</html>
