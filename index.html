@@ -1,46 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Contador Atahualpa</title>
+
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      font-family: Impact, sans-serif;
-      color: white;
-      background-image: url("estadio-borroso.jpg");
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background-repeat: no-repeat;
+    /* ----- FONDO CON FOTO + OSCURECIDO ----- */
+    body{
+      margin:0;
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      font-family:Impact,sans-serif;
+      color:#fff;
+      background:url('estadio-borroso.jpg') center/cover no-repeat fixed;
+      position:relative;
+    }
+    /* capa oscura encima de la foto */
+    body::before{
+      content:'';
+      position:absolute;inset:0;
+      background:#0008;           /* negro 50 % */
+      backdrop-filter:blur(2px);
+      z-index:-1;
     }
 
-    h1 {
-      font-size: 4em;
-      margin: 0.2em 0;
-    }
+    /* ----- TIPOGRAFÍA ----- */
+    .top   {font-size:1.7rem;margin:0 0 1rem 0;}
+    .days  {font-size:6rem;font-weight:bold;margin:0 0 1rem 0;}
+    .line  {font-size:1.3rem;line-height:1.4;margin:0;}
 
-    p {
-      font-size: 1.2em;
-      margin: 0.1em 0;
-      line-height: 1.5em;
-    }
+    /* hace que no se seleccione el texto al tocar */
+    *{user-select:none}
   </style>
 </head>
 <body>
-  <p>Van</p>
-  <h1 id="counter">0 días</h1>
-  <p>sin que la Concentración Deportiva de Pichincha<br>arregle el Estadio Atahualpa</p>
+
+  <div class="top">Van</div>
+  <div id="dias" class="days">0 días</div>
+  <p class="line">sin que la Concentración Deportiva de Pichincha</p>
+  <p class="line">arregle el Estadio Atahualpa</p>
 
   <script>
-    const fechaInicio = new Date("2024-07-03"); // Cambia la fecha si hace falta
-    const hoy = new Date();
-    const diferencia = hoy - fechaInicio;
-    const dias = Math.
+    /* fecha de inicio REAL: 3 jul 2025 a medianoche */
+    const inicio = new Date('2025-07-03T00:00:00');
+    const hoy    = new Date();
+    const diff   = Math.floor((hoy - inicio) / 86_400_000); // ms en un día
+    document.getElementById('dias').textContent = `${diff} días`;
+  </script>
+
+</body>
+</html>
