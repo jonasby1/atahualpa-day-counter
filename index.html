@@ -1,67 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Días sin arreglar el Atahualpa</title>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contador Estadio Atahualpa</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Anton', sans-serif;
-      background: #000;
-      color: #fff;
-      overflow: hidden;
-    }
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: url('estadio_borroso.jpg') center center / cover no-repeat;
-      opacity: 0.2;
-      z-index: -1;
-    }
-    .container {
+    body {
+      background-color: black;
+      color: white;
+      font-family: Impact, sans-serif;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      height: 100%;
-      padding: 2rem;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      font-size: 2rem;
     }
-    h1 {
-      font-size: 3rem;
-      margin: 0 0 1rem;
-    }
-    .counter {
-      font-size: 10rem;
-    }
-    .subtext {
-      margin-top: 1rem;
-      font-size: 1.2rem;
-      opacity: 0.7;
+    .days {
+      font-size: 5rem;
+      margin-top: 20px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>DÍAS SIN ARREGLAR<br>EL ESTADIO ATAHUALPA</h1>
-    <div class="counter" id="counter">0</div>
-    <div class="subtext">Desde el 1 de julio de 2025</div>
+  <div>
+    <div id="message" class="days"></div>
   </div>
 
   <script>
-    const startDate = new Date("2025-07-01T00:00:00-05:00");
-    function updateCounter() {
-      const today = new Date();
-      const diff = Math.floor((today - startDate) / 86400000);
-      document.getElementById('counter').textContent = '+' + diff;
-    }
-    updateCounter();
-    setInterval(updateCounter, 3600000);
+    // Fecha base: 4 de julio de 2025
+    const baseDate = new Date('2025-07-04');
+    const today = new Date();
+    const diffTime = today - baseDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    const message = `Van ${diffDays} días sin que la Concentración Deportiva de Pichincha arregle el Estadio Atahualpa`;
+    document.getElementById('message').textContent = message;
   </script>
 </body>
 </html>
