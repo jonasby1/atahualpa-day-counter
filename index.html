@@ -5,34 +5,30 @@
   <title>Contador Atahualpa</title>
 
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-family: Impact, sans-serif;
-      color: #fff;
-      background: url('estadio-borroso.jpg') center/cover no-repeat fixed;
-      position: relative;
+    body{
+      margin:0;height:100vh;
+      display:flex;flex-direction:column;justify-content:center;align-items:center;
+      text-align:center;font-family:Impact,sans-serif;color:#fff;
+      background:url('estadio-borroso.jpg') center/cover no-repeat fixed;
+      position:relative;
+    }
+    body::before{
+      content:'';position:absolute;inset:0;background:#0008;backdrop-filter:blur(2px);z-index:-1;
     }
 
-    body::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: #0008;
-      backdrop-filter: blur(2px);
-      z-index: -1;
+    .top{font-size:1.7rem;margin:0 0 1rem}
+    .days{font-size:6rem;font-weight:bold;margin:0 0 1rem}
+    .line{font-size:1.3rem;line-height:1.4;margin:0}
+
+    .buttons a{
+      color:#fff;padding:10px 15px;border-radius:8px;text-decoration:none;
+      font-size:1rem;display:inline-flex;align-items:center;gap:6px;
     }
-
-    .top   { font-size: 1.7rem; margin: 0 0 1rem 0; }
-    .days  { font-size: 6rem; font-weight: bold; margin: 0 0 1rem 0; }
-    .line  { font-size: 1.3rem; line-height: 1.4; margin: 0; }
-
-    * { user-select: none }
+    .x {background:#000;}          /* X en negro */
+    .fb{background:#4267B2;}       /* Facebook azul  */
+    .wa{background:#25D366;}       /* WhatsApp verde */
+    .ig{background:#E1306C;}       /* Instagram rosado*/
+    *{user-select:none}
   </style>
 </head>
 <body>
@@ -42,59 +38,42 @@
   <p class="line">sin que la Concentración Deportiva de Pichincha</p>
   <p class="line">arregle el Estadio Atahualpa</p>
 
+  <p style="margin:25px 0 10px;font-size:1.1rem;">Comparte esto:</p>
+  <div id="redes" class="buttons" style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;"></div>
+
   <script>
     const inicio = new Date('2025-07-03T00:00:00');
-    const hoy = new Date();
-    const diff = Math.floor((hoy - inicio) / 86_400_000);
+    const hoy    = new Date();
+    const diff   = Math.floor((hoy - inicio) / 86_400_000);
     document.getElementById('dias').textContent = `${diff} días`;
 
-    const contenedor = document.createElement('div');
-    contenedor.style.marginTop = '25px';
+    const url  = encodeURIComponent('https://teal-faloodeh-1d62f1.netlify.app');
+    const text = encodeURIComponent(`Van ${diff} días sin que @ConcePichincha arregle el Estadio Atahualpa`);
 
-    const texto = document.createElement('p');
-    texto.textContent = 'Comparte esto:';
-    texto.style.fontSize = '1.1rem';
-    contenedor.appendChild(texto);
-
-    const redes = document.createElement('div');
-    redes.style.display = 'flex';
-    redes.style.justifyContent = 'center';
-    redes.style.gap = '20px';
-    redes.style.flexWrap = 'wrap';
-
-    const enlaces = [
-      {
-        texto: '🐦 Twitter',
-        href: `https://twitter.com/intent/tweet?text=Van%20${diff}%20días%20sin%20que%20la%20Concentración%20Deportiva%20de%20Pichincha%20arregle%20el%20Estadio%20Atahualpa&url=https://teal-faloodeh-1d62f1.netlify.app`,
-        bg: '#1da1f2'
-      },
-      {
-        texto: '📘 Facebook',
-        href: `https://www.facebook.com/sharer/sharer.php?u=https://teal-faloodeh-1d62f1.netlify.app`,
-        bg: '#4267B2'
-      },
-      {
-        texto: '💬 WhatsApp',
-        href: `https://api.whatsapp.com/send?text=Van%20${diff}%20días%20sin%20que%20la%20Concentración%20Deportiva%20de%20Pichincha%20arregle%20el%20Estadio%20Atahualpa%20https://teal-faloodeh-1d62f1.netlify.app`,
-        bg: '#25D366'
-      }
+    const redes = [
+      {clase:'x',  label:'❌ X',        href:`https://twitter.com/intent/tweet?text=${text}&url=${url}`},
+      {clase:'fb', label:'📘 Facebook', href:`https://www.facebook.com/sharer/sharer.php?u=${url}`},
+      {clase:'wa', label:'💬 WhatsApp', href:`https://api.whatsapp.com/send?text=${text}%20${url}`},
+      {clase:'ig', label:'📷 Instagram',href:`https://www.instagram.com/`} // copia al portapapeles
     ];
 
-    for (const { texto, href, bg } of enlaces) {
+    const contenedor = document.getElementById('redes');
+    redes.forEach(({clase,label,href})=>{
       const a = document.createElement('a');
+      a.className = clase;
       a.href = href;
-      a.textContent = texto;
+      a.textContent = label;
       a.target = '_blank';
-      a.style.color = 'white';
-      a.style.background = bg;
-      a.style.padding = '10px 15px';
-      a.style.borderRadius = '8px';
-      a.style.textDecoration = 'none';
-      redes.appendChild(a);
-    }
-
-    contenedor.appendChild(redes);
-    document.body.appendChild(contenedor);
+      if(clase==='ig'){
+        // Copia mensaje + link antes de abrir Instagram
+        a.addEventListener('click', e=>{
+          e.preventDefault();
+          navigator.clipboard.writeText(`Van ${diff} días sin que la CDP arregle el Estadio Atahualpa ${decodeURIComponent(url)}`)
+            .then(()=>window.open(href,'_blank'));
+        });
+      }
+      contenedor.appendChild(a);
+    });
   </script>
 
 </body>
