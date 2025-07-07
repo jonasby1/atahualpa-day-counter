@@ -5,7 +5,7 @@
   <title>Días sin arreglar el Estadio Atahualpa</title>
   <style>
     body {
-      background: black url('assets/fondo.jpg') no-repeat center center;
+      background: black url('estadio_borroso.jpg') no-repeat center center fixed;
       background-size: cover;
       color: white;
       font-family: Impact, sans-serif;
@@ -22,17 +22,21 @@
     .top {
       font-size: 1.5rem;
       margin-bottom: 10px;
+      text-shadow: 2px 2px 4px black;
     }
 
     .days {
       font-size: 6rem;
       font-weight: bold;
+      text-shadow: 3px 3px 6px black;
     }
 
     .bottom {
       font-size: 1.2rem;
       margin-top: 10px;
-      max-width: 80%;
+      max-width: 90%;
+      line-height: 1.4;
+      text-shadow: 2px 2px 4px black;
     }
   </style>
 </head>
@@ -43,10 +47,3 @@
 
   <script>
     const baseDate = new Date('2025-07-04');
-    const today = new Date();
-    const diffTime = today - baseDate;
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    document.getElementById('count').textContent = `${diffDays} días`;
-  </script>
-</body>
-</html>
