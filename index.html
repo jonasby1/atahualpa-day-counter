@@ -5,49 +5,48 @@
   <title>Días sin arreglar el Estadio Atahualpa</title>
   <style>
     body {
-      background-color: black;
+      background: black url('assets/fondo.jpg') no-repeat center center;
+      background-size: cover;
       color: white;
       font-family: Impact, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      text-align: center;
       height: 100vh;
       margin: 0;
-      text-align: center;
+      padding: 20px;
     }
 
-    .van {
+    .top {
       font-size: 1.5rem;
-      margin-bottom: 1rem;
+      margin-bottom: 10px;
     }
 
     .days {
       font-size: 6rem;
       font-weight: bold;
-      margin-bottom: 1rem;
     }
 
-    .line {
-      font-size: 1.5rem;
-      line-height: 1.5;
+    .bottom {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      max-width: 80%;
     }
   </style>
 </head>
 <body>
-  <div class="van">Van</div>
-  <div id="days" class="days"></div>
-  <div class="line">sin que la Concentración Deportiva de Pichincha</div>
-  <div class="line">arregle el Estadio Atahualpa</div>
+  <div class="top">Van</div>
+  <div id="count" class="days"></div>
+  <div class="bottom">sin que la Concentración Deportiva de Pichincha<br>arregle el Estadio Atahualpa</div>
 
   <script>
-    // Fecha base: 4 de julio de 2025
     const baseDate = new Date('2025-07-04');
     const today = new Date();
     const diffTime = today - baseDate;
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-
-    document.getElementById('days').textContent = `${diffDays} días`;
+    document.getElementById('count').textContent = `${diffDays} días`;
   </script>
 </body>
 </html>
