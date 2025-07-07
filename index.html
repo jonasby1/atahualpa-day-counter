@@ -1,43 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Días sin arreglar el Estadio Atahualpa</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contador Atahualpa</title>
   <style>
-    /*  Fondo con tu foto  */
-    body{
-      background:url('estadio_borroso.jpg') center/cover no-repeat fixed;
-      background-color:#000;              /* se ve negro mientras carga   */
-      color:#fff;
-      font-family:Impact,sans-serif;
-      display:flex;flex-direction:column;
-      justify-content:center;align-items:center;
-      height:100vh;margin:0;text-align:center;
-      text-shadow:2px 2px 4px #000;       /* mejora contraste sobre foto  */
-      padding:20px;
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      font-family: Impact, sans-serif;
+      color: white;
+      background-image: url("estadio-borroso.jpg");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-repeat: no-repeat;
     }
 
-    .top{font-size:1.6rem;margin-bottom:1rem}
-    .days{font-size:6rem;font-weight:bold;margin:0.5rem 0}
-    .bottom{font-size:1.3rem;line-height:1.4;max-width:90%}
+    h1 {
+      font-size: 4em;
+      margin: 0.2em 0;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin: 0.1em 0;
+      line-height: 1.5em;
+    }
   </style>
 </head>
 <body>
-
-  <div class="top">Van</div>
-  <div id="dias" class="days">0 días</div>
-  <div class="bottom">
-    sin que la Concentración Deportiva de Pichincha<br>
-    arregle el Estadio Atahualpa
-  </div>
+  <p>Van</p>
+  <h1 id="counter">0 días</h1>
+  <p>sin que la Concentración Deportiva de Pichincha<br>arregle el Estadio Atahualpa</p>
 
   <script>
-    /*  Fecha base: 4 jul 2025  */
-    const base = new Date('2025-07-04T00:00:00');
-    const hoy  = new Date();
-    const dias = Math.floor((hoy - base) / 86_400_000);  /* ms en un día */
-    document.getElementById('dias').textContent = `${dias} días`;
-  </script>
-
-</body>
-</html>
+    const fechaInicio = new Date("2024-07-03"); // Cambia la fecha si hace falta
+    const hoy = new Date();
+    const diferencia = hoy - fechaInicio;
+    const dias = Math.
