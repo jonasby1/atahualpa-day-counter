@@ -1,121 +1,68 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Contador Atahualpa</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: Impact, sans-serif;
+    color: #fff;
+    background: #000 url('estadio-borroso.jpg') center/cover no-repeat fixed;
+    position: relative;
+  }
 
-  <!-- META PARA REDES SOCIALES -->
-  <meta property="og:title" content="Van X días sin que arreglen el Atahualpa">
-  <meta property="og:description" content="Contamos cuántos días lleva la Concentración Deportiva de Pichincha sin arreglar el Estadio Olímpico Atahualpa.">
-  <meta property="og:image" content="estadio-borroso.jpg">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://teal-faloodeh-1d62f1.netlify.app/">
+  body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #0008;
+    backdrop-filter: blur(2px);
+    z-index: -1;
+  }
 
-  <!-- WhatsApp y otros -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Van X días sin que arreglen el Atahualpa">
-  <meta name="twitter:description" content="Contamos cuántos días lleva la Concentración Deportiva de Pichincha sin arreglar el Estadio Olímpico Atahualpa.">
-  <meta name="twitter:image" content="estadio-borroso.jpg">
+  .top { font-size: 1.5rem; margin-bottom: 0.8rem; }
+  .days { font-size: 5rem; font-weight: bold; margin-bottom: 1rem; }
+  .line { font-size: 1.2rem; line-height: 1.4; margin: 0; }
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-family: Impact, sans-serif;
-      color: #fff;
-      background: url('estadio-borroso.jpg') center/cover no-repeat fixed;
-      position: relative;
-    }
+  .share {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+  }
 
-    body::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: #0008;
-      backdrop-filter: blur(2px);
-      z-index: -1;
-    }
+  .buttons a {
+    margin: 6px;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+  }
 
-    .top   { font-size: 1.7rem; margin: 0 0 1rem 0; }
-    .days  { font-size: 6rem; font-weight: bold; margin: 0 0 1rem 0; }
-    .line  { font-size: 1.3rem; line-height: 1.4; margin: 0; }
+  .buttons a.x { background: #000; }
+  .buttons a.fb { background: #3b5998; }
+  .buttons a.wa { background: #25D366; }
 
-    .share {
-      margin-top: 2rem;
-      font-size: 0.9rem;
-    }
+  .buttons svg {
+    margin-right: 6px;
+    height: 1em;
+  }
 
+  * { user-select: none }
+
+  /* MEDIA QUERY PARA PANTALLAS PEQUEÑAS */
+  @media (max-width: 600px) {
+    .top { font-size: 1.2rem; }
+    .days { font-size: 3rem; }
+    .line { font-size: 1rem; }
     .buttons a {
-      margin: 0 8px;
-      text-decoration: none;
-      padding: 10px 16px;
-      border-radius: 6px;
-      color: white;
-      font-weight: bold;
-      display: inline-flex;
-      align-items: center;
-      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      padding: 8px 10px;
     }
-
-    .buttons a.x       { background: #000; }
-    .buttons a.fb      { background: #3b5998; }
-    .buttons a.wa      { background: #25D366; }
-
-    .buttons svg {
-      margin-right: 6px;
-      height: 1em;
-    }
-
-    * { user-select: none }
-  </style>
-</head>
-<body>
-
-  <div class="top">Van</div>
-  <div id="dias" class="days">0 días</div>
-  <p class="line">sin que la Concentración Deportiva de Pichincha</p>
-  <p class="line">arregle el Estadio Atahualpa</p>
-
-  <div class="share">
-    <p>Comparte esto:</p>
-    <div class="buttons">
-      <a class="x" href="#" id="share-x" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" width="20"><path fill="white" d="M582 827 0 0h279l364 478 379-478h178L746 655l435 572H905L582 827z"/></svg>
-        X
-      </a>
-      <a class="fb" href="#" id="share-fb" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 320 512"><path fill="white" d="M279 288l14-92h-88v-60c0-25 12-50 52-50h40V6s-37-6-72-6c-73 0-121 44-121 124v70H82v92h76v224h92V288z"/></svg>
-        Facebook
-      </a>
-      <a class="wa" href="#" id="share-wa" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 448 512"><path fill="white" d="M380.9 97.1C339-1.2 239.3-32.3 156.7 19.7 93.1 59.5 59.7 132.2 75.1 205.2 75.5 206.9 75.5 208.7 75 210.4L44 312.2c-3.6 12.3 8.1 24.1 20.3 20.4l102.2-30.9c1.8-.5 3.6-.5 5.3 0 72.5 15.3 144.9-18.3 184.7-82 51.9-82.6 20.8-182.4-60.6-223.6zM224 336c-61.9 0-112-50.1-112-112S162.1 112 224 112s112 50.1 112 112-50.1 112-112 112z"/></svg>
-        WhatsApp
-      </a>
-    </div>
-  </div>
-
-  <script>
-    // Cálculo de días desde el 3 de julio de 2025
-    const inicio = new Date('2025-07-03T00:00:00');
-    const hoy    = new Date();
-    const diff   = Math.floor((hoy - inicio) / 86_400_000);
-    document.getElementById('dias').textContent = `${diff} días`;
-
-    // URL a compartir
-    const url = encodeURIComponent("https://teal-faloodeh-1d62f1.netlify.app/");
-    const textoFB = encodeURIComponent("Van " + diff + " días sin que la Concentración Deportiva de Pichincha arregle el Estadio Atahualpa");
-    const textoWA = encodeURIComponent(`Van ${diff} días sin que la Concentración Deportiva de Pichincha arregle el Estadio Atahualpa: ${url}`);
-    const textoX = encodeURIComponent(`Van ${diff} días sin que @ConcePichincha arregle el Estadio Atahualpa`);
-
-    document.getElementById('share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${textoFB}`;
-    document.getElementById('share-wa').href = `https://wa.me/?text=${textoWA}`;
-    document.getElementById('share-x').href  = `https://twitter.com/intent/tweet?text=${textoX}&url=${url}`;
-  </script>
-
-</body>
-</html>
+  }
+</style>
