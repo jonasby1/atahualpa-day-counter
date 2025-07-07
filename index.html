@@ -18,44 +18,66 @@
   <meta name="twitter:image" content="estadio-borroso.jpg">
 
   <style>
-    /* --- Fondo --- */
-    body{
-      margin:0;height:100vh;
-      background:#000 url('estadio-borroso.jpg') center/cover no-repeat fixed;
-      display:flex;justify-content:center;align-items:center;
-      font-family:Impact,sans-serif;color:#fff;text-align:center;
-    }
-    /* capa oscura sobre la foto */
-    body::before{
-      content:'';position:absolute;inset:0;
-      background:#0008;backdrop-filter:blur(2px);
-    }
-    /* contenedor principal encima del overlay */
-    #content{
-      position:relative;z-index:1;
-      padding:1rem;max-width:90vw;
-      display:flex;flex-direction:column;align-items:center;
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #000 url('estadio-borroso.jpg') center/cover no-repeat fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Impact, sans-serif;
+      color: #fff;
+      text-align: center;
     }
 
-    /* tipografías responsivas con clamp(min, vw, max) */
-    .top   {font-size:clamp(1.2rem,4vw,2rem);margin:0 0 .8rem}
-    .days  {font-size:clamp(3rem,12vw,6rem);font-weight:bold;margin:.3rem 0}
-    .line  {font-size:clamp(1rem,3.5vw,1.4rem);margin:0;line-height:1.3}
-
-    /* botones */
-    .share{margin:2rem 0 1rem;font-size:.9rem}
-    .buttons{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
-    .btn{
-      display:inline-flex;align-items:center;gap:.4rem;
-      padding:.6rem 1rem;border-radius:6px;font-size:.85rem;
-      text-decoration:none;color:#fff;font-family:Arial,Helvetica,sans-serif;font-weight:bold
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #0008;
+      backdrop-filter: blur(2px);
     }
-    .btn-x {background:#000;}
-    .btn-fb{background:#1877f2;}
-    .btn-wa{background:#25d366;}
 
-    /* evita selección accidental */
-    *{user-select:none}
+    #content {
+      position: relative;
+      z-index: 1;
+      padding: 1rem;
+      max-width: 90vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .top   { font-size: clamp(1.2rem, 4vw, 2rem); margin: 0 0 .8rem; }
+    .days  { font-size: clamp(3rem, 12vw, 6rem); font-weight: bold; margin: .3rem 0; }
+    .line  { font-size: clamp(1rem, 3.5vw, 1.4rem); margin: 0; line-height: 1.3; }
+
+    .share { margin: 2rem 0 1rem; font-size: .9rem; }
+    .buttons {
+      display: flex;
+      gap: .8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .6rem 1rem;
+      border-radius: 6px;
+      font-size: .85rem;
+      text-decoration: none;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+    }
+
+    .btn-x  { background: #000; }
+    .btn-fb { background: #1877f2; }
+    .btn-wa { background: #25d366; }
+
+    * { user-select: none; }
   </style>
 </head>
 <body>
@@ -75,26 +97,23 @@
   </div>
 
   <script>
-    /* === Calcula días desde 3-jul-2025 === */
-    const inicio = new Date('2025-07-03T00:00:00');
-    const diff   = Math.floor((Date.now() - inicio) / 86_400_000);
+    // Fijar la fecha de inicio: 4 de julio de 2025, hora de Ecuador (UTC-5)
+    const inicio = new Date('2025-07-04T00:00:00-05:00');
+    const ahora = new Date();
+
+    // Calcular diferencia en milisegundos, luego en días enteros
+    const diff = Math.floor((ahora - inicio) / 86_400_000);
     document.getElementById('dias').textContent = `${diff} días`;
 
-    /* === Construye enlaces de compartir === */
-    const url   = encodeURIComponent(location.href);
-    const textoFB = encodeURIComponent(
-      `Van ${diff} días sin que la Concentración Deportiva de Pichincha arregle el Estadio Atahualpa`
-    );
-    const textoWA = encodeURIComponent(
-      `Van ${diff} días sin que la Concentración Deportiva de Pichincha arregle el Estadio Atahualpa:`
-    );
-    const textoX = encodeURIComponent(
-      `Van ${diff} días sin que @ConcePichincha arregle el Estadio Atahualpa`
-    );
+    // Enlaces de compartir
+    const url = encodeURIComponent(location.href);
 
-    document.getElementById('x').href  = `https://twitter.com/intent/tweet?text=${textoX}&url=${url}`;
-    document.getElementById('fb').href = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${textoFB}`;
-    document.getElementById('wa').href = `https://wa.me/?text=${textoWA}%20${url}`;
+    const texto = `Van ${diff} días sin que la Concentración Deportiva de Pichincha arregle el Estadio Atahualpa`;
+    const textoX = `Van ${diff} días sin que @ConcePichincha arregle el Estadio Atahualpa`;
+
+    document.getElementById('x').href  = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textoX)}&url=${url}`;
+    document.getElementById('fb').href = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${encodeURIComponent(texto)}`;
+    document.getElementById('wa').href = `https://wa.me/?text=${encodeURIComponent(texto)}%20${url}`;
   </script>
 
 </body>
