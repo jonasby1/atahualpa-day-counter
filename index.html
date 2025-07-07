@@ -5,36 +5,34 @@
   <title>Contador Atahualpa</title>
 
   <style>
-    /* ----- FONDO CON FOTO + OSCURECIDO ----- */
-    body{
-      margin:0;
-      height:100vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      font-family:Impact,sans-serif;
-      color:#fff;
-      background:url('estadio-borroso.jpg') center/cover no-repeat fixed;
-      position:relative;
-    }
-    /* capa oscura encima de la foto */
-    body::before{
-      content:'';
-      position:absolute;inset:0;
-      background:#0008;           /* negro 50 % */
-      backdrop-filter:blur(2px);
-      z-index:-1;
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-family: Impact, sans-serif;
+      color: #fff;
+      background: url('estadio-borroso.jpg') center/cover no-repeat fixed;
+      position: relative;
     }
 
-    /* ----- TIPOGRAFÍA ----- */
-    .top   {font-size:1.7rem;margin:0 0 1rem 0;}
-    .days  {font-size:6rem;font-weight:bold;margin:0 0 1rem 0;}
-    .line  {font-size:1.3rem;line-height:1.4;margin:0;}
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #0008;
+      backdrop-filter: blur(2px);
+      z-index: -1;
+    }
 
-    /* hace que no se seleccione el texto al tocar */
-    *{user-select:none}
+    .top   { font-size: 1.7rem; margin: 0 0 1rem 0; }
+    .days  { font-size: 6rem; font-weight: bold; margin: 0 0 1rem 0; }
+    .line  { font-size: 1.3rem; line-height: 1.4; margin: 0; }
+
+    * { user-select: none }
   </style>
 </head>
 <body>
@@ -45,11 +43,58 @@
   <p class="line">arregle el Estadio Atahualpa</p>
 
   <script>
-    /* fecha de inicio REAL: 3 jul 2025 a medianoche */
     const inicio = new Date('2025-07-03T00:00:00');
-    const hoy    = new Date();
-    const diff   = Math.floor((hoy - inicio) / 86_400_000); // ms en un día
+    const hoy = new Date();
+    const diff = Math.floor((hoy - inicio) / 86_400_000);
     document.getElementById('dias').textContent = `${diff} días`;
+
+    const contenedor = document.createElement('div');
+    contenedor.style.marginTop = '25px';
+
+    const texto = document.createElement('p');
+    texto.textContent = 'Comparte esto:';
+    texto.style.fontSize = '1.1rem';
+    contenedor.appendChild(texto);
+
+    const redes = document.createElement('div');
+    redes.style.display = 'flex';
+    redes.style.justifyContent = 'center';
+    redes.style.gap = '20px';
+    redes.style.flexWrap = 'wrap';
+
+    const enlaces = [
+      {
+        texto: '🐦 Twitter',
+        href: `https://twitter.com/intent/tweet?text=Van%20${diff}%20días%20sin%20que%20la%20Concentración%20Deportiva%20de%20Pichincha%20arregle%20el%20Estadio%20Atahualpa&url=https://teal-faloodeh-1d62f1.netlify.app`,
+        bg: '#1da1f2'
+      },
+      {
+        texto: '📘 Facebook',
+        href: `https://www.facebook.com/sharer/sharer.php?u=https://teal-faloodeh-1d62f1.netlify.app`,
+        bg: '#4267B2'
+      },
+      {
+        texto: '💬 WhatsApp',
+        href: `https://api.whatsapp.com/send?text=Van%20${diff}%20días%20sin%20que%20la%20Concentración%20Deportiva%20de%20Pichincha%20arregle%20el%20Estadio%20Atahualpa%20https://teal-faloodeh-1d62f1.netlify.app`,
+        bg: '#25D366'
+      }
+    ];
+
+    for (const { texto, href, bg } of enlaces) {
+      const a = document.createElement('a');
+      a.href = href;
+      a.textContent = texto;
+      a.target = '_blank';
+      a.style.color = 'white';
+      a.style.background = bg;
+      a.style.padding = '10px 15px';
+      a.style.borderRadius = '8px';
+      a.style.textDecoration = 'none';
+      redes.appendChild(a);
+    }
+
+    contenedor.appendChild(redes);
+    document.body.appendChild(contenedor);
   </script>
 
 </body>
