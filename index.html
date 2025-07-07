@@ -1,68 +1,101 @@
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-family: Impact, sans-serif;
-    color: #fff;
-    background: #000 url('estadio-borroso.jpg') center/cover no-repeat fixed;
-    position: relative;
-  }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Contador Atahualpa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  body::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: #0008;
-    backdrop-filter: blur(2px);
-    z-index: -1;
-  }
+  <!-- ▼ Meta genéricos para redes (imagen y texto fijo) -->
+  <meta property="og:title" content="¿Cuántos días sin arreglar el Atahualpa?">
+  <meta property="og:description" content="Contamos cuántos días lleva la Concentración Deportiva de Pichincha sin arreglar el estadio.">
+  <meta property="og:image" content="estadio-borroso.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://teal-faloodeh-1d62f1.netlify.app/">
 
-  .top { font-size: 1.5rem; margin-bottom: 0.8rem; }
-  .days { font-size: 5rem; font-weight: bold; margin-bottom: 1rem; }
-  .line { font-size: 1.2rem; line-height: 1.4; margin: 0; }
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="¿Cuántos días sin arreglar el Atahualpa?">
+  <meta name="twitter:description" content="Contamos los días sin mejoras en el estadio.">
+  <meta name="twitter:image" content="estadio-borroso.jpg">
 
-  .share {
-    margin-top: 2rem;
-    font-size: 0.9rem;
-  }
-
-  .buttons a {
-    margin: 6px;
-    text-decoration: none;
-    padding: 10px 14px;
-    border-radius: 6px;
-    color: white;
-    font-weight: bold;
-    display: inline-flex;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    font-size: 0.9rem;
-  }
-
-  .buttons a.x { background: #000; }
-  .buttons a.fb { background: #3b5998; }
-  .buttons a.wa { background: #25D366; }
-
-  .buttons svg {
-    margin-right: 6px;
-    height: 1em;
-  }
-
-  * { user-select: none }
-
-  /* MEDIA QUERY PARA PANTALLAS PEQUEÑAS */
-  @media (max-width: 600px) {
-    .top { font-size: 1.2rem; }
-    .days { font-size: 3rem; }
-    .line { font-size: 1rem; }
-    .buttons a {
-      font-size: 0.8rem;
-      padding: 8px 10px;
+  <style>
+    /* --- Fondo --- */
+    body{
+      margin:0;height:100vh;
+      background:#000 url('estadio-borroso.jpg') center/cover no-repeat fixed;
+      display:flex;justify-content:center;align-items:center;
+      font-family:Impact,sans-serif;color:#fff;text-align:center;
     }
-  }
-</style>
+    /* capa oscura sobre la foto */
+    body::before{
+      content:'';position:absolute;inset:0;
+      background:#0008;backdrop-filter:blur(2px);
+    }
+    /* contenedor principal encima del overlay */
+    #content{
+      position:relative;z-index:1;
+      padding:1rem;max-width:90vw;
+      display:flex;flex-direction:column;align-items:center;
+    }
+
+    /* tipografías responsivas con clamp(min, vw, max) */
+    .top   {font-size:clamp(1.2rem,4vw,2rem);margin:0 0 .8rem}
+    .days  {font-size:clamp(3rem,12vw,6rem);font-weight:bold;margin:.3rem 0}
+    .line  {font-size:clamp(1rem,3.5vw,1.4rem);margin:0;line-height:1.3}
+
+    /* botones */
+    .share{margin:2rem 0 1rem;font-size:.9rem}
+    .buttons{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
+    .btn{
+      display:inline-flex;align-items:center;gap:.4rem;
+      padding:.6rem 1rem;border-radius:6px;font-size:.85rem;
+      text-decoration:none;color:#fff;font-family:Arial,Helvetica,sans-serif;font-weight:bold
+    }
+    .btn-x {background:#000;}
+    .btn-fb{background:#1877f2;}
+    .btn-wa{background:#25d366;}
+
+    /* evita selección accidental */
+    *{user-select:none}
+  </style>
+</head>
+<body>
+
+  <div id="content">
+    <div class="top">Van</div>
+    <div id="dias" class="days">0&nbsp;días</div>
+    <p class="line">sin que la Concentración Deportiva de Pichincha</p>
+    <p class="line">arregle el Estadio Atahualpa</p>
+
+    <div class="share">Comparte esto:</div>
+    <div class="buttons">
+      <a id="x"  class="btn btn-x"  target="_blank">❌ X</a>
+      <a id="fb" class="btn btn-fb" target="_blank">📘 Facebook</a>
+      <a id="wa" class="btn btn-wa" target="_blank">💬 WhatsApp</a>
+    </div>
+  </div>
+
+  <script>
+    /* === Calcula días desde 3-jul-2025 === */
+    const inicio = new Date('2025-07-03T00:00:00');
+    const diff   = Math.floor((Date.now() - inicio) / 86_400_000);
+    document.getElementById('dias').textContent = `${diff} días`;
+
+    /* === Construye enlaces de compartir === */
+    const url   = encodeURIComponent(location.href);
+    const textoFB = encodeURIComponent(
+      `Van ${diff} días sin que la Concentración Deportiva de Pichincha arregle el Estadio Atahualpa`
+    );
+    const textoWA = encodeURIComponent(
+      `Van ${diff} días sin que la Concentración Deportiva de Pichincha arregle el Estadio Atahualpa:`
+    );
+    const textoX = encodeURIComponent(
+      `Van ${diff} días sin que @ConcePichincha arregle el Estadio Atahualpa`
+    );
+
+    document.getElementById('x').href  = `https://twitter.com/intent/tweet?text=${textoX}&url=${url}`;
+    document.getElementById('fb').href = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${textoFB}`;
+    document.getElementById('wa').href = `https://wa.me/?text=${textoWA}%20${url}`;
+  </script>
+
+</body>
+</html>
