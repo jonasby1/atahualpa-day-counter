@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contador Estadio Atahualpa</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Días sin arreglar el Atahualpa</title>
   <style>
     body {
       background-color: black;
@@ -16,18 +16,26 @@
       height: 100vh;
       margin: 0;
       padding: 20px;
-      font-size: 2rem;
+      flex-direction: column;
     }
+
+    .line {
+      font-size: 2rem;
+      margin: 10px 0;
+    }
+
     .days {
-      font-size: 5rem;
-      margin-top: 20px;
+      font-size: 6rem;
       font-weight: bold;
+      margin: 20px 0;
     }
   </style>
 </head>
 <body>
-  <div>
-    <div id="message" class="days"></div>
+  <div id="message">
+    <div class="line">Van</div>
+    <div id="days" class="days"></div>
+    <div class="line">sin que la Concentración Deportiva de Pichincha arregle el Estadio Atahualpa</div>
   </div>
 
   <script>
@@ -37,8 +45,7 @@
     const diffTime = today - baseDate;
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-    const message = `Van ${diffDays} días sin que la Concentración Deportiva de Pichincha arregle el Estadio Atahualpa`;
-    document.getElementById('message').textContent = message;
+    document.getElementById('days').textContent = `${diffDays} días`;
   </script>
 </body>
 </html>
