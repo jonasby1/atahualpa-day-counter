@@ -24,10 +24,10 @@
       color:#fff;padding:10px 15px;border-radius:8px;text-decoration:none;
       font-size:1rem;display:inline-flex;align-items:center;gap:6px;
     }
-    .x {background:#000;}          /* X en negro */
-    .fb{background:#4267B2;}       /* Facebook azul  */
-    .wa{background:#25D366;}       /* WhatsApp verde */
-    .ig{background:#E1306C;}       /* Instagram rosado*/
+    .x  {background:#000;}        /* X negro */
+    .fb {background:#4267B2;}     /* Facebook azul */
+    .wa {background:#25D366;}     /* WhatsApp verde */
+    .ig {background:#E1306C;}     /* Instagram rosado */
     *{user-select:none}
   </style>
 </head>
@@ -47,14 +47,16 @@
     const diff   = Math.floor((hoy - inicio) / 86_400_000);
     document.getElementById('dias').textContent = `${diff} días`;
 
-    const url  = encodeURIComponent('https://teal-faloodeh-1d62f1.netlify.app');
-    const text = encodeURIComponent(`Van ${diff} días sin que @ConcePichincha arregle el Estadio Atahualpa`);
+    const url = encodeURIComponent('https://teal-faloodeh-1d62f1.netlify.app');
+
+    const textoX  = encodeURIComponent(`Van ${diff} días sin que @ConcePichincha arregle el Estadio Atahualpa`);
+    const textoOT = encodeURIComponent(`Van ${diff} días sin que la Concentración Deportiva de Pichincha arregle el Estadio Atahualpa`);
 
     const redes = [
-      {clase:'x',  label:'❌ X',        href:`https://twitter.com/intent/tweet?text=${text}&url=${url}`},
+      {clase:'x',  label:'❌ X',        href:`https://twitter.com/intent/tweet?text=${textoX}&url=${url}`},
       {clase:'fb', label:'📘 Facebook', href:`https://www.facebook.com/sharer/sharer.php?u=${url}`},
-      {clase:'wa', label:'💬 WhatsApp', href:`https://api.whatsapp.com/send?text=${text}%20${url}`},
-      {clase:'ig', label:'📷 Instagram',href:`https://www.instagram.com/`} // copia al portapapeles
+      {clase:'wa', label:'💬 WhatsApp', href:`https://api.whatsapp.com/send?text=${textoOT}%20${url}`},
+      {clase:'ig', label:'📷 Instagram',href:`https://www.instagram.com/`} // mensaje copiado
     ];
 
     const contenedor = document.getElementById('redes');
@@ -65,10 +67,9 @@
       a.textContent = label;
       a.target = '_blank';
       if(clase==='ig'){
-        // Copia mensaje + link antes de abrir Instagram
         a.addEventListener('click', e=>{
           e.preventDefault();
-          navigator.clipboard.writeText(`Van ${diff} días sin que la CDP arregle el Estadio Atahualpa ${decodeURIComponent(url)}`)
+          navigator.clipboard.writeText(`Van ${diff} días sin que la Concentración Deportiva de Pichincha arregle el Estadio Atahualpa ${decodeURIComponent(url)}`)
             .then(()=>window.open(href,'_blank'));
         });
       }
