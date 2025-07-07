@@ -4,46 +4,40 @@
   <meta charset="UTF-8">
   <title>Días sin arreglar el Estadio Atahualpa</title>
   <style>
-    body {
-      background: black url('estadio_borroso.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      font-family: Impact, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      height: 100vh;
-      margin: 0;
-      padding: 20px;
+    /*  Fondo con tu foto  */
+    body{
+      background:url('estadio_borroso.jpg') center/cover no-repeat fixed;
+      background-color:#000;              /* se ve negro mientras carga   */
+      color:#fff;
+      font-family:Impact,sans-serif;
+      display:flex;flex-direction:column;
+      justify-content:center;align-items:center;
+      height:100vh;margin:0;text-align:center;
+      text-shadow:2px 2px 4px #000;       /* mejora contraste sobre foto  */
+      padding:20px;
     }
 
-    .top {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-      text-shadow: 2px 2px 4px black;
-    }
-
-    .days {
-      font-size: 6rem;
-      font-weight: bold;
-      text-shadow: 3px 3px 6px black;
-    }
-
-    .bottom {
-      font-size: 1.2rem;
-      margin-top: 10px;
-      max-width: 90%;
-      line-height: 1.4;
-      text-shadow: 2px 2px 4px black;
-    }
+    .top{font-size:1.6rem;margin-bottom:1rem}
+    .days{font-size:6rem;font-weight:bold;margin:0.5rem 0}
+    .bottom{font-size:1.3rem;line-height:1.4;max-width:90%}
   </style>
 </head>
 <body>
+
   <div class="top">Van</div>
-  <div id="count" class="days"></div>
-  <div class="bottom">sin que la Concentración Deportiva de Pichincha<br>arregle el Estadio Atahualpa</div>
+  <div id="dias" class="days">0 días</div>
+  <div class="bottom">
+    sin que la Concentración Deportiva de Pichincha<br>
+    arregle el Estadio Atahualpa
+  </div>
 
   <script>
-    const baseDate = new Date('2025-07-04');
+    /*  Fecha base: 4 jul 2025  */
+    const base = new Date('2025-07-04T00:00:00');
+    const hoy  = new Date();
+    const dias = Math.floor((hoy - base) / 86_400_000);  /* ms en un día */
+    document.getElementById('dias').textContent = `${dias} días`;
+  </script>
+
+</body>
+</html>
